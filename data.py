@@ -1,6 +1,6 @@
 import pandas as pd
 
-star_data = pd.read_csv("habitable_star_data.csv")
+star_data = pd.read_csv("final1.csv")
 star_rows = star_data[1:]
 
 star_names = star_data["Star Name"]
