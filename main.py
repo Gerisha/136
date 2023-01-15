@@ -1,4 +1,4 @@
-from data import data
+from data1 import data
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
