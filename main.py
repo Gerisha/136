@@ -1,29 +1,24 @@
-from flask import Flask, jsonify, request
 from data import data
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+@app.route('/')
 
-@app.route("/")
-def index():
+def all_stars_data():
     return jsonify({
-        "data": data,
-        "status": "success"
+        'data': data,
+        'message': 'success'
     }), 200
 
-@app.route("/star")
-def star():
-    url = request.url
-    url = url.split('/')[2].split('=')[0]
-    url = url.replace('%20', ' ')
-    url = url.replace('%5B', '[')
-    url = url.replace('%5D', ']')
-    print(url)
+@app.route('/star')
 
-    star_data = [item for item in data if item["Star Name"] == url]
+def stars_data():
+    name = request.args.get('name')
+    star_data = next(item for item in data if item[name] == name)
     return jsonify({
-        "data": star_data,
-        "status": "success"
+        'data': star_data,
+        'message': 'success'
     }), 200
 
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(debug=True)
